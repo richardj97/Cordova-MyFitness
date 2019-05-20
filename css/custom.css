@@ -1,0 +1,164 @@
+/* ================================= 
+  Original Custom Styles
+==================================== */
+
+h2 {
+    text-align: center;
+}
+
+ul {
+  list-style: none;
+    margin: 0;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    text-align: center;
+}
+
+.distance {
+    display: inline;
+}
+
+a:link {
+    color: #13904C;
+}
+
+a:hover {
+    color: darkseagreen !important;
+}
+
+hr { display: block; height: 1px;
+    border: 0; border-top: 1px solid #dcdcdc;
+    margin: 1em 0; padding: 0; 
+}
+
+/* ================================= 
+  Other Styles
+==================================== */
+
+img {
+  object-fit: cover;
+  border-radius:50%;
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#deviceLogText {
+  text-align: left;
+}
+
+.stopworkout.active,
+.stopchallenge.active {
+  background: #fff;
+  color: #AF292A !important;
+  text-shadow: none !important;
+}
+
+.stopworkout.active,
+.stopchallenge.active,
+.stopworkout.active:before, 
+.stopchallenge.active:before,
+.stopworkout.active:after,
+.stopchallenge.active:after {
+  transition: all 1s linear;
+}
+
+.stopworkout.active:before,
+.stopchallenge.active:before, 
+.stopworkout.active:after,
+.stopchallenge.active:after {
+  background: rgb(255, 255, 255);
+}
+
+
+/* ================================= 
+  Stage Button Styles
+==================================== */
+
+
+.stage {
+    text-shadow: none !important;
+    color: white !important;
+}
+
+.incomplete {
+    background-color: indianred !important;
+    opacity: .2 !important;
+}
+
+.complete {
+    background-color: #13904C !important;
+}
+
+.current {
+    background-color: dodgerblue !important;
+}
+
+.workout {
+    background-color: #13904C !important;
+}
+
+.signOut {
+    background-color: firebrick !important;
+}
+
+.challenge {
+    background-color: rebeccapurple !important;
+}
+
+
+/* ================================= 
+  Layout Styles
+==================================== */
+
+.inner,
+.main-content {
+  width: 90%;
+  max-width: 1025px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  min-height: 80px;
+  z-index: 1000;
+}
+
+
+/* ================================= 
+  Helper Classes
+==================================== */
+
+.clearfix::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+.is-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.centered {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>My Fitness</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="cordova.js"></script>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="css/themes/16629926.css" />
+<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+<link rel="stylesheet" href="css/custom.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="plugins/picker/picker.css">
+</head>
+<body>
+
+<!-- Login Page -->
+<div data-role="page" id="signIn" data-theme="a">
+	<div data-role="header">
+    <h1>My Fitness</h1>
+
+	</div>
+    <div data-role="content">
+    <h2>Sign into your account</h2><br>
+    <img src="./assets/img/firebase.png" alt="" /><br>
+    <input type="email" name="email" id="email" placeholder="Email">
+    <input type="password" name="password" id="password" placeholder="Password">
+    <button type="submit" id="signInBtn">Sign In</button>
+    <br><div style="text-align:center;">Don't have an account? <a href="#signUp" style="text-decoration: none;">Sign up</a></div> 
+    </div>
+</div>
+    
+<!-- Sign Up Page -->
+<div data-role="page" id="signUp" data-theme="a">
+	<div data-role="header">
+    <h1>My Fitness</h1>
+	</div>
+    <div data-role="content">
+    <h2>Create an account</h2><br>
+    <img src="./assets/img/firebase.png" alt="" /><br>
+    <input type="email" name="email" id="regEmail" placeholder="Email">
+    <input type="password" name="password" id="regPassword" placeholder="Password">
+    <input type="password" name="password" id="regConfPassword" placeholder="Confirm Password">
+    <input type="text" name="firstName" id="firstName" placeholder="First Name">
+    <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+    <input type="number" name="weight" id="weight" placeholder="Weight (in pounds)">
+    <button type="submit" id="signUpBtn">Create Account</button>
+    <br><div style="text-align:center;">Already have an account? <a href="#signIn" style="text-decoration: none;">Sign In</a></div>
+    <br><div style="text-align:center;">Read our <a href="#privPolicy" style="text-decoration: none;">Privacy Policy</a></div>
+    </div>
+</div>
+
+    
+<!-- Home Page -->
+<div data-role="page" id="home" data-theme="a">
+	<div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+	</div>
+    <div id="#homeContent" data-role="content">
+        <br><img src="./assets/img/user.png" alt="" /><br>
+        <p id="signInDetails"></p>
+        <div style="text-align: center">
+            <p class="distance">Total Distance (km):</p>
+            <p class="distance" id="totalDistance"></p>
+        </div>
+        <p id="currentStage">Current Stage: </p>
+        <hr>
+        <button id="homeWorkoutBtn" class="stage workout" data-icon="arrow-r">Start Workout</button>
+        <button id="workoutHistory" class ="stage current" data-icon="bullets">Workout History</button>
+        <button id="localGyms" class ="stage challenge" data-icon="search">Find Gyms</button>
+    </div>
+</div>
+    
+<!-- Workout Page -->
+<div data-role="page" id="workout" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2>My Workout</h2>
+        <button id="stage_current" data-icon="">Loading...</button> 
+        <hr><p id="workoutStatus"></p>
+        <p id="workoutData">Getting info...</p>
+        <button data-role="button" class="stage workout" id="startWorkout" data-icon="arrow-r">Start Workout</button>
+        <button id="stopworkout"></button>
+        <button data-role="button" class="stage signOut stopworkout" id="stopWorkout" data-icon="delete">Hold to Stop Workout</button> 
+        <p id="progress"></p>
+        <hr><p id="challengeLb">Challenge yourself to a time attack!</p>
+        <button data-role="button" class="stage challenge" id="challengeBtn" data-icon="clock">Start Challenge</button>  
+    </div>
+</div>
+    
+<!-- Challenge Yourself Page -->
+<div data-role="page" id="challenge" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2>Challenge Yourself</h2>
+        <p id="challengeTitle">Enter the time for challenge</p>
+        <input type="text" id="timeChallenge" class="form-control js-time-picker" value="00:00:00">
+        <p id="challengeStatus"></p><hr>
+        <p id="challengeData">Getting info...</p>
+        <button id="stopchallenge"></button>
+        <button data-role="button" id="startChallenge" class="stage workout" data-icon="arrow-r">Start Challenge</button>
+        <button data-role="button" class="stage signOut stopchallenge" id="stopChallenge" data-icon="delete">Hold to Stop Challenge</button>
+        <p id="challengeProgress"></p>
+    </div>
+ </div>
+    
+<!-- Stages Page -->
+<div data-role="page" id="stages" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+    <h2 id="stagesTitle">My Stages</h2>
+    <div id="stageButtons"></div>
+    </div> 
+</div>
+       
+<!-- Settings Page -->
+<div data-role="page" id="settings" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2>My Fitness Settings</h2>
+        <label class="switch">
+        <input type="checkbox" id="highAccCb"><p>Enable High GPS Accuracy</p>
+        </label>
+        <label class="switch" id="notificationSwitch">
+            <input type="checkbox" id="enableNotification" checked><p>Enable Notifications</p>
+        </label>
+        <hr>
+        <div data-role="footer">
+                <div data-role="navbar">
+                     <ul>
+                        <li><a id="developerBtn" href="#developerTools" class="stage current" data-transition="slide" data-icon="gear">Developer Tools</a></li>
+                    </ul>
+                </div>
+            </div>
+        <div data-role="footer">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="signOutBtn" class="stage signOut" data-transition="slide" data-icon="power">Sign Out</a></li>
+                    <li><a id="clearWorkouts" class="stage signOut" data-transition="slide" data-icon="minus">Clear Workouts</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Developer Tools Page --> 
+<div data-role="page" id="developerTools" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2>Developer Tools</h2>
+        <p id="uid"></p>
+        <p id="rid">Remote Notifications Registered: No</p><hr>
+
+        <div data-role="footer" id="devFooter">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="sendNotif" class="stage complete" data-transition="slide" data-icon="comment">Test Local Notifications</a></li>
+                    <li><a id="sendRemoteNotif" class="stage current" data-transition="slide" data-icon="cloud">Test Remote Notifications</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div data-role="footer">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="viewLogs" class="stage challenge" data-transition="slide" data-icon="bullets">View Logs</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Workout Result Page -->  
+<div data-role="page" id="workoutResult" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2 id="workoutTitle"></h2>
+        <p id="workoutDesc"></p>
+        <div id="map_canvas" style="width: 100%; height: 400px"></div>
+    </div>
+</div>
+
+<!-- Workout History Page -->  
+<div data-role="page" id="workoutHistory" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2>Workout History</h2><br>
+        <ul data-role="listview" id="workout_history"></ul>
+    </div>
+</div>
+
+<!-- Find Local Gyms Page -->  
+<div data-role="page" id="findGyms" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2>Find Local Gyms</h2>
+        <input type="number" name="radius" id="radiusTb" placeholder="Enter radius e.g. 1500">
+        <button type="submit" id="mapBtn" class="stage current" data-icon="search">View Gyms</button>
+        <div style="width: 100%; overflow:visible; height: 400px;" id="map_canvas2"></div> 
+    </div>
+</div>
+
+<!-- Offline Page -->
+<div data-role="page" id="offline" data-theme="a">
+	<div data-role="header">
+	<h1>My Fitness</h1>
+	</div>
+    <div data-role="content">
+    <h2>You're offline :(</h2>
+    <p>To use this app, please connect to the internet.</p>
+    </div>
+</div>
+
+<!-- Device Log Page -->
+<div data-role="page" id="deviceLog" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="slide" data-icon="home">My Fitness</a></li>
+                <li><a href="#workout" data-transition="slide" data-icon="heart">Workout</a></li>
+                <li><a href="#stages" data-transition="slide" data-icon="star">Progress</a></li>
+                <li><a href="#settings" data-transition="slide" data-icon="gear">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="content">
+        <h2>Device Log</h2><hr>
+        <p id="deviceLogText"></p>
+    </div>
+</div>
+
+<!-- Privacy Policy Page -->
+<div data-role="page" id="privPolicy" data-theme="a">
+    <div data-role="header">
+        <h1>My Fitness</h1>
+    </div>
+
+    <div data-role="content">
+        <h2>Privacy Policy</h2>
+        <p>This app collects your email, profile picture and user Id from a secure Firebase connection and transmits your GPS position for the purpose of My Fitness installation. 
+            It will continue to run in the background until you stop the workout or challenge. 
+            Your GPS position is encrypted and stored in our database with a unique id, but no other identifying information. 
+            Your data will not be resold or distributed to any other third parties.</p>
+        <br><div style="text-align:center;"><a href="#signUp" style="text-decoration: none;">Sign up for an account</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script> 
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script> 
+<script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-firestore.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYSoP56moZ5ZgMbG7xVprnyiDRSoSbnH4&libraries=places"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+<script type="text/javascript" src="js/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="plugins/picker/picker.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script src="js/jqm_defaults.js"></script>
+
+</body>
+</html>
